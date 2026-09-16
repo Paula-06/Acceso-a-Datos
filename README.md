@@ -20,4 +20,5 @@ Comprobar si hay algo guardado con commit
 git status
 
 Cambiar email y usuario
-º
+$ git config --global user.email "correo@gmail.com"
+$ git config --global user.name "nombreUsuario"
