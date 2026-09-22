@@ -77,11 +77,11 @@ public class GestorCliente {
 
         //Mostrar en main
         System.out.println("\n--- LISTADO DE CLIENTES ---");
-        System.out.printf("%-5s | %-20s | %-12s | %-10s%n", "ID", "NOMBRE", "TELÉFONO", "MATRÍCULA");
+        System.out.printf("ID", "NOMBRE", "TELÉFONO", "MATRÍCULA");
         System.out.println("--------------------------------------------------");
 
         for (Cliente c : clientes) {
-            System.out.printf("%-5d | %-20s | %-12s | %-10s%n",
+            System.out.printf(
                     c.getId(),
                     c.getNombre(),
                     c.getTelefono(),
@@ -148,6 +148,7 @@ public class GestorCliente {
 
     // Obtiene un cliente por su identificador.
     public Cliente obtenerClientePorId(int id) {
+
         return null;
     }
 

@@ -1,9 +1,5 @@
 public class Validador {
-
-// Comprueba que un texto no esté vacío.
-    public boolean textoValido(String texto) {
-        return false;
-    }
+    //Esta clase aun no se si es necesaria, segun vaya adelantando en las demás clases
 
 // Comprueba que un importe sea válido.
     public boolean importeValido(double importe) {

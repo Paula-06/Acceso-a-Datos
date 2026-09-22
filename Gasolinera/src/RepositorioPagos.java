@@ -4,6 +4,7 @@ public class RepositorioPagos {
 
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {
+
         return null; //aun no está activo
     }
 

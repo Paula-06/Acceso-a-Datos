@@ -20,7 +20,7 @@ public class Menu {
                 case 3 -> gestorCliente.buscarCliente();
                 case 4 -> System.out.println("Procesar pago - Pendiente");
                 case 5 -> System.out.println("Consultar pagos - Pendiente");
-                case 0 -> System.out.println("Programa finalizado.");
+                case 0 -> System.out.println("Hasta Pronto.");
                 default -> System.out.println("Opción no válida.");
             }
         } while (opcion != 0);
