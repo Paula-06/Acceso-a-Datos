@@ -1,6 +1,5 @@
 public class Cliente implements Comparable<Cliente> {
     //Atributos
-   // private static int contador = 1;
     private int id;
     private String nombre;
     private String telefono;
@@ -8,8 +7,7 @@ public class Cliente implements Comparable<Cliente> {
 
     //Constructores
     //Crea un nuevo cliente
-    public Cliente(int id, String nombre, String telefono, String matricula) {
-        this.id = id;
+    public Cliente(String nombre, String telefono, String matricula) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.matricula = matricula;
@@ -29,29 +27,12 @@ public class Cliente implements Comparable<Cliente> {
         return matricula;
     }
 
-    //Setters
-    //Necesarios o no hacen falta, habrá modificaciones?
-    /*
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-    */
-
     @Override
     public String toString() {
-        return "Opción: " + id +
-        "\tNombre: " + nombre +
-        "\tTeléfono: " + telefono +
-        "\tMatrícula: " + matricula;
-
+        return "ID: " + id +
+                ", Nombre: " + nombre +
+                ", Teléfono: " + telefono +
+                ", Matrícula: " + matricula;
     }
 
     // Implementación de la comparación

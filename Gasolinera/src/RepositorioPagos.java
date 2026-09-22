@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class RepositorioPagos {
+public class RepositorioPagos implements IRepositorioPagos {
 
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {

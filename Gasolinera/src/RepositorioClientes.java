@@ -1,25 +1,27 @@
 import java.util.List;
 
-public class RepositorioClientes {
-    // Carga los clientes almacenados.
-    public List<Cliente> cargarClientes() {
+public class RepositorioClientes implements IRepositorioClientes {
 
+    static final String FICHERO = "clientes.txt";
+    //Devuelve todo vacío de clientes hasta que este la interfaz
+
+    @Override
+    public List<Cliente> cargarClientes() {
         return null;
     }
 
-// Guarda un cliente.
+    @Override
     public void guardarCliente(Cliente cliente) {
+
     }
 
-// Obtiene el siguiente identificador disponible.
+    @Override
     public int obtenerSiguienteId() {
-
-        return 0;
+        return  0;
     }
-
-// Comprueba si existe una matrícula.
+    @Override
     public boolean existeMatricula(String matricula) {
-
         return false;
     }
+
 }

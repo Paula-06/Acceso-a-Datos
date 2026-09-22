@@ -1,16 +1,17 @@
-import java.sql.Date;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class Pago {
     //Atributos
     private int id;
     private int idCliente;
-    private Date fecha;
-    private Double importe;
-    private Double litros;
+    private LocalDate fecha;
+    private double importe;
+    private double litros;
     private String combustible;
 
     //Constructor
-    public Pago(int id, String combustible, Double litros, Double importe, Date fecha, int idCliente) {
+    public Pago(int id, String combustible, double litros, double importe, LocalDate fecha, int idCliente) {
         this.id = id;
         this.combustible = combustible;
         this.litros = litros;
@@ -30,7 +31,7 @@ public class Pago {
     }
 
     public Date getFecha() {
-        return fecha;
+        return getFecha();
     }
 
     public Double getImporte() {
@@ -50,11 +51,13 @@ public class Pago {
 
     @Override
     public String toString() {
-        return id + "\t" +
-        idCliente + "\t" +
-        fecha + "\t" +
-        importe + "\t" +
-        litros + "\t" +
-                combustible;
+        return "Pago{" +
+                "id=" + id +
+                ", idCliente=" + idCliente +
+                ", fecha=" + fecha +
+                ", importe=" + importe +
+                ", litros=" + litros +
+                ", combustible='" + combustible + '\'' +
+                '}';
     }
 }
