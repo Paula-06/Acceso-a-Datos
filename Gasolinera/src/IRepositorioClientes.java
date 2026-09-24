@@ -9,4 +9,6 @@ public interface IRepositorioClientes {
     int obtenerSiguienteId();
 
     boolean existeMatricula(String matricula);
+
+    Cliente buscarPorId(int id);
 }

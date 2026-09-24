@@ -3,7 +3,16 @@ import java.util.Scanner;
 public class Menu {
 
     private Scanner sc = new Scanner(System.in);
-    private GestorCliente gestorCliente = new GestorCliente();
+
+    private GestorCliente gestorCliente;
+    private GestorPagos gestorPagos;
+
+    public Menu(GestorCliente gestorCliente,
+                GestorPagos gestorPagos) {
+
+        this.gestorCliente = gestorCliente;
+        this.gestorPagos = gestorPagos;
+    }
 
     public void iniciar() {
         int opcion;
@@ -16,10 +25,10 @@ public class Menu {
             switch (opcion) {
 
                 case 1 -> gestorCliente.altaCliente();
-                case 2 -> gestorCliente.listarCliente();
+                case 2 -> gestorCliente.listarClientes();
                 case 3 -> gestorCliente.buscarCliente();
-                case 4 -> System.out.println("Procesar pago - Pendiente");
-                case 5 -> System.out.println("Consultar pagos - Pendiente");
+                case 4 -> gestorPagos.procesarPago();
+                case 5 -> gestorPagos.consultarPago();
                 case 0 -> System.out.println("Hasta Pronto.");
                 default -> System.out.println("Opción no válida.");
             }

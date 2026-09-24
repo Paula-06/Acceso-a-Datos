@@ -1,13 +1,14 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        // Repositorio pendiente de implementar.
-        // Se deja comentado temporalmente para evitar errores de compilación.
+        IRepositorioClientes repoClientes = new RepositorioClientes();
+        IRepositorioPagos repoPagos = new RepositorioPagos();
 
-        // AHORA MISMO DARÁ FALLO YA QUE EN
-         Menu menu = new Menu();
-         menu.iniciar();
+        GestorCliente gestorCliente = new GestorCliente(repoClientes);
+        GestorPagos gestionPagos = new GestorPagos(repoPagos, repoClientes);
+
+        Menu menu = new Menu(gestorCliente, gestionPagos);
+
+        menu.iniciar();
     }
 }

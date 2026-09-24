@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 
-public class GestionPagos {
+public class GestorPagos {
     //Funcionalidades obligatorias
 
     IRepositorioPagos repPago;
@@ -11,7 +11,7 @@ public class GestionPagos {
     Scanner sc = new Scanner(System.in);
 
     // Constructor que recibe ambos repositorios
-    public GestionPagos(IRepositorioPagos repositorioPagos, IRepositorioClientes repositorioClientes) {
+    public GestorPagos(IRepositorioPagos repositorioPagos, IRepositorioClientes repositorioClientes) {
         this.repPago = repositorioPagos;
         this.repoCliente = repositorioClientes;
     }
@@ -62,7 +62,16 @@ public class GestionPagos {
 
     //Consultar pagos
     public void consultarPago() {
+        List<Pago> pagos = repPago.cargarPagos();
+        if (pagos.isEmpty()) {
+            System.out.println("No hay pagos registrados.");
+            return;
+        }
 
+        System.out.println("\n----- LISTADO DE PAGOS -----");
+        for (Pago p : pagos) {
+            System.out.println(p);
+        }
 
     }
 

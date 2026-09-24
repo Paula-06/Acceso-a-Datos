@@ -7,10 +7,18 @@ public class Cliente implements Comparable<Cliente> {
 
     //Constructores
     //Crea un nuevo cliente
-    public Cliente(String nombre, String telefono, String matricula) {
+    public Cliente(int id, String nombre, String telefono, String matricula) {
+        this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.matricula = matricula;
+    }
+
+    public String toCsv() {
+        return id + ";" +
+                nombre + ";" +
+                telefono + ";" +
+                matricula.toUpperCase();
     }
 
     //Getters
