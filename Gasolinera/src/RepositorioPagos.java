@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,8 @@ public class RepositorioPagos implements IRepositorioPagos {
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {
     List<Pago> pagos = new ArrayList<>();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         Path ruta = Path.of(FICHERO);
         try (BufferedReader br = Files.newBufferedReader(ruta, StandardCharsets.UTF_8)) {
@@ -31,17 +34,26 @@ public class RepositorioPagos implements IRepositorioPagos {
                 if (datos.length != 6) {
                     continue;
                 }
-                /*
-                int id = Integer.parseInt(datos[0]);
-                int idCliente = Integer.parseInt(datos[1]);
-                Date fecha = Date.parse(datos[2]);
-                double importe = Double.parseDouble(datos[3]);
-                double litros = Double.parseDouble(datos[4]);
-                String combustible = datos[5];
 
-                Pago pago = new Pago(id, combustible, litros, importe, fecha, idCliente);
-                pagos.add(pago);
-*/
+                try {
+
+                    int id = Integer.parseInt(datos[0]);
+                    int idCliente = Integer.parseInt(datos[1]);
+                    Date fecha = formato.parse(datos[2]);
+                    double importe = Double.parseDouble(datos[3]);
+                    double litros = Double.parseDouble(datos[4]);
+                    String combustible = datos[5];
+
+                    Pago pago = new Pago(id, combustible, litros, importe, fecha, idCliente);
+                    pagos.add(pago);
+
+                } catch (ParseException e) {
+                    System.out.println("Error: " + e);
+                }
+
+
+
+
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -55,9 +67,7 @@ public class RepositorioPagos implements IRepositorioPagos {
         Path ruta = Path.of(FICHERO);
 
         try (BufferedWriter escritor = Files.newBufferedWriter(ruta,
-                StandardCharsets.UTF_8,
-                StandardOpenOption.APPEND,
-                StandardOpenOption.CREATE)) {
+                StandardCharsets.UTF_8)) {
             escritor.write(pago.toCsv());
             escritor.newLine();
         } catch (IOException e) {

@@ -29,7 +29,7 @@ import java.util.*;
 
         //Pedimos telefono
             do {
-                System.out.println("Teléfono: ");
+                System.out.print("Teléfono: ");
                 telefono = sc.nextLine().trim();
 
                 if (telefono.isEmpty()) {
@@ -39,7 +39,7 @@ import java.util.*;
 
         //Pedimos matricula y verificamos que no exista
             do {
-                System.out.println("Matrícula: ");
+                System.out.print("Matrícula: ");
                 matricula = sc.nextLine().trim().toUpperCase();//Ponemos en mayusculas
 
                 if (matricula.isEmpty()) {
@@ -57,7 +57,7 @@ import java.util.*;
 
             Cliente cliente = new Cliente(id, nombre, telefono, matricula);
             repositorio.guardarCliente(cliente);
-            System.out.println("Cliente registrado con ID" + id);
+            System.out.println("Cliente registrado con ID " + id);
         }
 
         // Listar clientes
@@ -82,7 +82,6 @@ import java.util.*;
 
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
-                return;
             }
 
             System.out.print("Buscar: ");
