@@ -30,7 +30,7 @@ public class RepositorioClientes implements IRepositorioClientes{
 
                 if (datos.length != 4) {
                     continue;
-                }
+                    }
 /*
                 int id = Integer.parseInt(datos[0]);
                 String nombre = datos[1];
