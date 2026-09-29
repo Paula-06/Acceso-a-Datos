@@ -1,3 +1,4 @@
+
 public class Cliente implements Comparable<Cliente> {
     //Atributos
     private int id;
@@ -15,6 +16,7 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public String toCsv() {
+
         return id + ";" +
                 nombre + ";" +
                 telefono + ";" +

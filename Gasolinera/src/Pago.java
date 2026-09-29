@@ -1,30 +1,32 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Pago {
     //Atributos
     private int id;
-    private int idCliente;
+    private String Cliente;
     private Date fecha;
     private double importe;
     private double litros;
-    private String combustible;
+    private Combustible combustible;
 
     //Constructor
-    public Pago(int id, String combustible, double litros, double importe, Date fecha, int idCliente) {
+    public Pago(int id, int combustible, Date litros, double importe, double fecha, String Cliente) {
         this.id = id;
-        this.idCliente = idCliente;
+        this.Cliente = Cliente;
         this.fecha = fecha;
         this.importe = importe;
         this.litros = litros;
         this.combustible = combustible;
     }
     public  String toCsv() {
+        SimpleDateFormat formateo = new SimpleDateFormat("dd/MM/yyyy");
         return id + ";" +
-                idCliente + ";" +
-                fecha + ";" +
+                Cliente + ";" +
+                formateo.format(fecha) + ";" +
                 importe + ";" +
                 litros + ";" +
-                combustible;
+                combustible.name();
     }
 
     //Getters
@@ -32,23 +34,23 @@ public class Pago {
         return id;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public String getNombreCliente() {
+        return Cliente;
     }
 
     public Date getFecha() {
         return fecha;
     }
 
-    public Double getImporte() {
+    public double getImporte() {
         return importe;
     }
 
-    public Double getLitros() {
+    public double getLitros() {
         return litros;
     }
 
-    public String getCombustible() {
+    public Combustible getCombustible() {
         return combustible;
     }
 
@@ -59,7 +61,7 @@ public class Pago {
     public String toString() {
         return "Pago{" +
                 "id=" + id +
-                ", idCliente=" + idCliente +
+                ", Nombre=" + Cliente +
                 ", fecha=" + fecha +
                 ", importe=" + importe +
                 ", litros=" + litros +

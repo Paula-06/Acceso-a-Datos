@@ -40,13 +40,13 @@ public class RepositorioPagos implements PagosDAO {
                 try {
 
                     int id = Integer.parseInt(datos[0]);
-                    int idCliente = Integer.parseInt(datos[1]);
+                    int cliente = Integer.parseInt(datos[1]);
                     Date fecha = formato.parse(datos[2]);
                     double importe = Double.parseDouble(datos[3]);
                     double litros = Double.parseDouble(datos[4]);
                     String combustible = datos[5];
 
-                    Pago pago = new Pago(id, combustible, litros, importe, fecha, idCliente);
+                    Pago pago = new Pago(id, cliente, fecha, importe, litros, combustible);
                     pagos.add(pago);
 
                 } catch (ParseException e) {

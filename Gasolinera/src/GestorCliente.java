@@ -41,15 +41,12 @@ import java.util.*;
             do {
                 System.out.print("Matrícula: ");
                 matricula = sc.nextLine().trim().toUpperCase();//Ponemos en mayusculas
-
                 if (matricula.isEmpty()) {
                     System.out.println("La matrícula no puede estar vacía.");
                 }
             } while (matricula.isEmpty());
-
             if(repositorio.existeMatricula(matricula)){
-                System.out.println(
-                        "Esa matrícula ya está registrada.");
+                System.out.println("Esa matrícula ya está registrada.");
                 return;
             }
 
@@ -82,6 +79,7 @@ import java.util.*;
 
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
+                return;
             }
 
             System.out.print("Buscar: ");
