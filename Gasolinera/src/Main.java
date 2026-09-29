@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
 
-        IRepositorioClientes repoClientes = new RepositorioClientes();
-        IRepositorioPagos repoPagos = new RepositorioPagos();
+        ClientesDAO repoClientes = new RepositorioClientes();
+        PagosDAO repoPagos = new RepositorioPagos();
 
         GestorCliente gestorCliente = new GestorCliente(repoClientes);
         GestorPagos gestionPagos = new GestorPagos(repoPagos, repoClientes);

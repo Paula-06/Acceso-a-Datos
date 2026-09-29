@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface IRepositorioPagos {
+public interface PagosDAO {
 
     List<Pago> cargarPagos();
 

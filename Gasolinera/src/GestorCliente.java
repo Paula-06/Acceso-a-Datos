@@ -2,10 +2,10 @@ import java.util.*;
 
     public class GestorCliente {
 
-        IRepositorioClientes repositorio;
+        ClientesDAO repositorio;
         Scanner sc = new Scanner(System.in);
 
-        public GestorCliente(IRepositorioClientes repositorio) {
+        public GestorCliente(ClientesDAO repositorio) {
             this.repositorio = repositorio;
         }
 
@@ -122,4 +122,6 @@ import java.util.*;
 
             return null;
         }
+
+        //buscar por matricula
     }

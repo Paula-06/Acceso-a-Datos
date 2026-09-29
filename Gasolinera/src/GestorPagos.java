@@ -1,17 +1,21 @@
+
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
 
 
 public class GestorPagos {
     //Funcionalidades obligatorias
 
-    IRepositorioPagos repPago;
-    IRepositorioClientes repoCliente;
+    PagosDAO repPago;
+    ClientesDAO repoCliente;
     Scanner sc = new Scanner(System.in);
 
     // Constructor que recibe ambos repositorios
-    public GestorPagos(IRepositorioPagos repositorioPagos, IRepositorioClientes repositorioClientes) {
+    public GestorPagos(PagosDAO repositorioPagos, ClientesDAO repositorioClientes) {
         this.repPago = repositorioPagos;
         this.repoCliente = repositorioClientes;
     }
@@ -57,6 +61,73 @@ public class GestorPagos {
                 return;
             }
         } while (clienteSeleccionado == null);
+
+
+        Date fecha = null;
+        SimpleDateFormat formateo = new SimpleDateFormat("dd/MM/yyyy");
+        do {
+            System.out.println("Fecha (dd/MM/yyyy; vacío para hoy)");
+            String fechaTexto = sc.nextLine();
+
+            if (fechaTexto.isEmpty()) {
+                fecha = new Date();
+            }
+
+
+        } while (fecha == null);
+
+
+        //Pedir importe
+        double importe = 0;
+
+        do {
+            System.out.println("Importe(€): ");
+            importe = sc.nextDouble();
+
+            try {
+
+                if (importe <= 0) {
+                    System.out.println("Introduce una cantidad mayor que cero y con un máximo de dos decimales");
+                }
+
+                if (Math.round(importe*100);
+
+                //BigDecimal bd = new BigDecimal(importe);
+                //boolean esDecimal = bd.scale() <= 2;
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } while (importe <= 0);
+
+        //Pedir litros
+        double litros;
+        do {
+            System.out.println("Litros: ");
+            litros = sc.nextDouble();
+
+            try {
+                if (litros <= 0) {
+                    System.out.println("Introduce una cantidad mayor que cero y con un máximo de dos dcimales");
+                }
+
+                BigDecimal bd = new BigDecimal(litros);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }  while (litros <= 0);
+
+        //Pedir combustible
+        Combustible combustible = null;
+        do {
+            System.out.println("Combustible: ");
+            
+
+
+        } while (combustible == null);
+
+
 
     }
 

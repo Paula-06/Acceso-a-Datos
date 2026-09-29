@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RepositorioPagos implements IRepositorioPagos {
+public class RepositorioPagos implements PagosDAO {
     static final String FICHERO = "pagos.csv";
+    private final Path ruta = Path.of(FICHERO);
+
+
 
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {
@@ -19,7 +22,6 @@ public class RepositorioPagos implements IRepositorioPagos {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-        Path ruta = Path.of(FICHERO);
         try (BufferedReader br = Files.newBufferedReader(ruta, StandardCharsets.UTF_8)) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -27,14 +29,9 @@ public class RepositorioPagos implements IRepositorioPagos {
                     continue; // ignorar las líneas que están vacías o que solo tienen espacios en blanco.
                 }
                 String[] datos = linea.split(";");
-
-                if (datos.length != 4) {
-                    continue;
-                }
                 if (datos.length != 6) {
                     continue;
                 }
-
                 try {
 
                     int id = Integer.parseInt(datos[0]);
@@ -50,10 +47,6 @@ public class RepositorioPagos implements IRepositorioPagos {
                 } catch (ParseException e) {
                     System.out.println("Error: " + e);
                 }
-
-
-
-
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

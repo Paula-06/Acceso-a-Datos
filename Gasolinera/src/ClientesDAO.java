@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface IRepositorioClientes {
+public interface ClientesDAO {
 
     List<Cliente> cargarClientes();
 
