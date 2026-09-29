@@ -123,5 +123,18 @@ import java.util.*;
             return null;
         }
 
-        //buscar por matricula
+        public void buscarPorMatricula() {
+            System.out.println("Matricula: ");
+            String matricula = sc.nextLine();
+
+            List<Cliente> clientes = repositorio.cargarClientes();
+
+            for (Cliente cliente : clientes) {
+                if (cliente.getMatricula().equalsIgnoreCase(matricula)) {
+                    System.out.println(cliente);
+                    return;
+                }
+            }
+            System.out.println("No existe");
+        }
     }

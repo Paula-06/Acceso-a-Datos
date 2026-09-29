@@ -50,12 +50,11 @@ public class RepositorioClientes implements ClientesDAO {
         Path ruta = Path.of(FICHERO);
         //7. Escribir texto
         //8. StandardOpenOption: decidir cómo se abre
-        /*
-        CREATE_NEW : lo crea, pero falla si ya existe.
-        APPEND : añade al final.
-        * */
 
-        try (BufferedWriter escritor = Files.newBufferedWriter(ruta,StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)) {
+
+        try (BufferedWriter escritor = Files.newBufferedWriter(ruta,StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)) {
             escritor.write(cliente.toCsv());
             escritor.newLine();
         } catch (IOException e) {

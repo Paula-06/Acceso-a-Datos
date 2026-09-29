@@ -1,6 +1,7 @@
 
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,23 +42,13 @@ public class GestorPagos {
             System.out.println("ID del cliente: ");
             String IdCliente = sc.nextLine().trim();
             try {
-
                 int idBuscado = Integer.parseInt(IdCliente);
-                if (clientes != null) {
-                    for (Cliente c : clientes) {
-                        if (c.getId() == idBuscado) {
-                            clienteSeleccionado = c;
-                            break;
-                        }
-                    }
+                if (idBuscado <= 0) {
+                    System.out.println("El identificador debe ser un entero positivo.");
                 }
 
-                if (clienteSeleccionado == null) {
-                    System.out.println("Cliente inexistente");
-                    return; // Si el cliente no existe, corta la ejecución según el requisito
-                }
             } catch (NumberFormatException e) {
-                System.out.println("Cliente inexistente");
+                System.out.println("No existe un cliente con ese identificador. No se ha registrado el pago.");
                 return;
             }
         } while (clienteSeleccionado == null);
@@ -69,8 +60,14 @@ public class GestorPagos {
             System.out.println("Fecha (dd/MM/yyyy; vacío para hoy)");
             String fechaTexto = sc.nextLine();
 
-            if (fechaTexto.isEmpty()) {
-                fecha = new Date();
+            try {
+                if (fechaTexto.isEmpty()) {
+                    fecha = new Date();
+                } else {
+                    fecha = formateo.parse(fechaTexto);
+                }
+            } catch (ParseException e) {
+                System.out.println("Error: " + e.getMessage());
             }
 
 
@@ -122,11 +119,20 @@ public class GestorPagos {
         Combustible combustible = null;
         do {
             System.out.println("Combustible: ");
+            String opciones = sc.nextLine();
 
-
+            if (opciones.equalsIgnoreCase("Gasolina")) {
+                combustible = Combustible.Gasolina;
+            } else if (opciones.equalsIgnoreCase("Diesel")) {
+                combustible = Combustible.Diesel;
+            } else {
+                System.out.println("Debes ser Gasolina o Diesel");
+            }
 
         } while (combustible == null);
 
+        int idPago = repPago.obtenerSigId();
+        Pago pago = new Pago(idPago, clienteSeleccionado.getNombre(), fecha, importe, litros, combustible);
 
 
     }

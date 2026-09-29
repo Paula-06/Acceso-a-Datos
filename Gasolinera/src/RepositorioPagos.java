@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class RepositorioPagos implements PagosDAO {
     public List<Pago> cargarPagos() {
     List<Pago> pagos = new ArrayList<>();
 
+
+        if (!Files.exists(ruta)) {
+            return pagos;
+        }
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         try (BufferedReader br = Files.newBufferedReader(ruta, StandardCharsets.UTF_8)) {
@@ -60,7 +65,10 @@ public class RepositorioPagos implements PagosDAO {
         Path ruta = Path.of(FICHERO);
 
         try (BufferedWriter escritor = Files.newBufferedWriter(ruta,
-                StandardCharsets.UTF_8)) {
+                StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)) {
+
             escritor.write(pago.toCsv());
             escritor.newLine();
         } catch (IOException e) {

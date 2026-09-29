@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c545e781-201c-4580-b8f5-06dff2bbd03a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestorCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestorCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestorPagos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestorPagos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pago.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RepositorioClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RepositorioClientes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RepositorioPagos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RepositorioPagos.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +79,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10315.125" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10315.125" />
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
       </set>
     </attachedChunks>
   </component>

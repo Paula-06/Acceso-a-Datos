@@ -12,11 +12,11 @@ public class Pago {
     //Constructor
     public Pago(int id, String combustible, double litros, double importe, Date fecha, int idCliente) {
         this.id = id;
-        this.combustible = combustible;
-        this.litros = litros;
-        this.importe = importe;
-        this.fecha = fecha;
         this.idCliente = idCliente;
+        this.fecha = fecha;
+        this.importe = importe;
+        this.litros = litros;
+        this.combustible = combustible;
     }
     public  String toCsv() {
         return id + ";" +
