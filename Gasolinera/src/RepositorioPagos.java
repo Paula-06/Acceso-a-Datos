@@ -38,13 +38,12 @@ public class RepositorioPagos implements PagosDAO {
                     continue;
                 }
                 try {
-
                     int id = Integer.parseInt(datos[0]);
-                    int cliente = Integer.parseInt(datos[1]);
+                    String cliente = datos[1];
                     Date fecha = formato.parse(datos[2]);
                     double importe = Double.parseDouble(datos[3]);
                     double litros = Double.parseDouble(datos[4]);
-                    String combustible = datos[5];
+                    Combustible combustible = Combustible.valueOf(datos[5]);
 
                     Pago pago = new Pago(id, cliente, fecha, importe, litros, combustible);
                     pagos.add(pago);
