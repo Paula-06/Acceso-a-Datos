@@ -127,7 +127,7 @@ public class GestorPagos {
 
         //Crear Pago
         int idPago = repPago.obtenerSigId();
-        Pago pago = new Pago(idPago, combustible, litros, importe, fecha, clienteSeleccionado.getNombre());
+        Pago pago = new Pago(idPago, clienteSeleccionado.getNombre(), fecha, importe, litros, combustible);
 
         //Guardar pago
         repPago.guardarPago(pago);

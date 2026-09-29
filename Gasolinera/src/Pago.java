@@ -4,25 +4,26 @@ import java.util.Date;
 public class Pago {
     //Atributos
     private int id;
-    private String Cliente;
+    private String cliente;
     private Date fecha;
     private double importe;
     private double litros;
     private Combustible combustible;
 
     //Constructor
-    public Pago(int id, int combustible, Date litros, double importe, double fecha, String Cliente) {
+    public Pago(int id, String cliente, Date fecha, double importe, double litros, Combustible combustible) {
         this.id = id;
-        this.Cliente = Cliente;
+        this.cliente = cliente;
         this.fecha = fecha;
         this.importe = importe;
         this.litros = litros;
         this.combustible = combustible;
     }
+
     public  String toCsv() {
         SimpleDateFormat formateo = new SimpleDateFormat("dd/MM/yyyy");
         return id + ";" +
-                Cliente + ";" +
+                cliente + ";" +
                 formateo.format(fecha) + ";" +
                 importe + ";" +
                 litros + ";" +
@@ -35,7 +36,7 @@ public class Pago {
     }
 
     public String getNombreCliente() {
-        return Cliente;
+        return cliente;
     }
 
     public Date getFecha() {
@@ -61,7 +62,7 @@ public class Pago {
     public String toString() {
         return "Pago{" +
                 "id=" + id +
-                ", Nombre=" + Cliente +
+                ", Nombre=" + cliente +
                 ", fecha=" + fecha +
                 ", importe=" + importe +
                 ", litros=" + litros +
