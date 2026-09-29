@@ -89,11 +89,11 @@ public class GestorPagos {
                 if (importe <= 0) {
                     System.out.println("Introduce una cantidad mayor que cero y con un máximo de dos decimales");
                 }
+                //Comprobar decimal
+                if (Math.round(importe*100) != importe *100) {
+                    throw new IllegalArgumentException("");
+                }
 
-                if (Math.round(importe*100);
-
-                //BigDecimal bd = new BigDecimal(importe);
-                //boolean esDecimal = bd.scale() <= 2;
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -122,7 +122,7 @@ public class GestorPagos {
         Combustible combustible = null;
         do {
             System.out.println("Combustible: ");
-            
+
 
 
         } while (combustible == null);
