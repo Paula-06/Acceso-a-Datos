@@ -60,10 +60,11 @@ public class Pago {
 
     @Override
     public String toString() {
+        SimpleDateFormat formateo = new SimpleDateFormat("dd/MM/yyyy");
         return "Pago: " +
                 "id: " + id +
                 ", Nombre: " + cliente +
-                ", fecha: " + fecha +
+                ", fecha: " + formateo.format(fecha) +
                 ", importe: " + importe +
                 ", litros: " + litros +
                 ", combustible: " + combustible;

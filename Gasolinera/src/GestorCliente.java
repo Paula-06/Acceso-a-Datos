@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
 
     public class GestorCliente {
 
@@ -87,6 +90,7 @@ import java.util.*;
 
             boolean encontrado = false;
 
+            clientes.sort(Comparator.comparing(Cliente::getNombre));
             for (Cliente cliente : clientes) {
 
                 String datos = (
