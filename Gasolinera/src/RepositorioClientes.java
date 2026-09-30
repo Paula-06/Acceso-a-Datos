@@ -12,10 +12,12 @@ import java.util.List;
 public class RepositorioClientes implements ClientesDAO {
     static final String FICHERO = "clientes.csv";
     private final Path clientecsv = Path.of(FICHERO);
-    private final List<Cliente> clientes = new ArrayList<>();
+
 
     // @Override
     public List<Cliente> cargarClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+    //    clientes.clear();//vacía la lista que tienes en memoria
 
         if (!Files.exists(clientecsv)) {
             return clientes;//Ta vacio / no existe
@@ -95,6 +97,7 @@ public class RepositorioClientes implements ClientesDAO {
     }
 
     public List<Cliente> getClienteOrden() {
+        List<Cliente> clientes = new ArrayList<>();
         return clientes.stream().sorted(Comparator.comparing(Cliente::getNombre,String.CASE_INSENSITIVE_ORDER).thenComparing(Cliente::getId)).toList();
     }
 

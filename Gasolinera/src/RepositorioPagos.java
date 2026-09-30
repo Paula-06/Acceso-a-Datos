@@ -14,12 +14,12 @@ import java.util.List;
 public class RepositorioPagos implements PagosDAO {
     static final String FICHERO = "pagos.csv";
     private final Path ruta = Path.of(FICHERO);
-    List<Pago> pagos = new ArrayList<>();
 
 
 
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {
+    List<Pago> pagos = new ArrayList<>();
 
 
         if (!Files.exists(ruta)) {
@@ -77,6 +77,14 @@ public class RepositorioPagos implements PagosDAO {
 
     // // Calcula el siguiente id para un nuevo cliente.
     public int obtenerSigId() {
-    return 0;
+        List<Pago> pagos = cargarPagos();
+
+        int max = 0;
+
+        for (Pago p : pagos) {
+            if (p.getId() > max ) {
+                max = p.getId();
+            }
+        } return max;
     }
 }
