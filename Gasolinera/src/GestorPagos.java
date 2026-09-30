@@ -23,12 +23,12 @@ public class GestorPagos {
 
     // Procesar un pago de repostaje
     public void procesarPago() {
-    List<Cliente> clientes = repoCliente.cargarClientes();
+        List<Cliente> clientes = repoCliente.cargarClientes();
 
-    if (clientes == null || clientes.isEmpty()) {
-        System.out.println("No se han encontrado clientes.");
-        return;
-    }
+        if (clientes == null || clientes.isEmpty()) {
+            System.out.println("No se han encontrado clientes.");
+            return;
+        }
 
         System.out.printf("%-5s %-15s %-12s %-12s%n", "ID", "NOMBRE", "TELÉFONO", "MATRÍCULA");
         for (Cliente c : clientes) {
@@ -85,7 +85,7 @@ public class GestorPagos {
                     System.out.println("Introduce una cantidad mayor que cero y con un máximo de dos decimales");
                 }
                 //Comprobar decimal
-                if (Math.round(importe*100) != importe *100) {
+                if (Math.round(importe * 100) != importe * 100) {
                     throw new IllegalArgumentException("");
                 }
             } catch (Exception e) {
@@ -106,7 +106,7 @@ public class GestorPagos {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        }  while (litros <= 0);
+        } while (litros <= 0);
 
         sc.nextLine();
 
@@ -131,12 +131,14 @@ public class GestorPagos {
 
         //Guardar pago
         repPago.guardarPago(pago);
-        System.out.println(
-                "Pago registrado con ID " + idPago + ". Cliente: "
-                        + clienteSeleccionado.getNombre()
-                        + ". Importe: " + importe + " €"
-                        + "litros: " + litros
-                        + "COMBUSTIBLE: " + combustible);
+        System.out.printf(
+                "%-5d %-15s %-10.2f %-10.2f %-15s%n",
+                idPago,
+                clienteSeleccionado.getNombre(),
+                importe,
+                litros,
+                combustible
+        );
     }
 
     //Consultar pagos

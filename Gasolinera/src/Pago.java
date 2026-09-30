@@ -60,13 +60,12 @@ public class Pago {
 
     @Override
     public String toString() {
-        return "Pago{" +
-                "id=" + id +
-                ", Nombre=" + cliente +
-                ", fecha=" + fecha +
-                ", importe=" + importe +
-                ", litros=" + litros +
-                ", combustible='" + combustible + '\'' +
-                '}';
+        return "Pago: " +
+                "id: " + id +
+                ", Nombre: " + cliente +
+                ", fecha: " + fecha +
+                ", importe: " + importe +
+                ", litros: " + litros +
+                ", combustible: " + combustible;
     }
 }
