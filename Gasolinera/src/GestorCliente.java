@@ -60,6 +60,8 @@ import java.util.Scanner;
             System.out.println("Cliente registrado con ID " + id);
         }
 
+
+
         // Listar clientes
         public void listarClientes() {
 
@@ -89,8 +91,6 @@ import java.util.Scanner;
             String texto = sc.nextLine().trim().toLowerCase();
 
             boolean encontrado = false;
-
-            clientes.sort(Comparator.comparing(Cliente::getNombre));
             for (Cliente cliente : clientes) {
 
                 String datos = (

@@ -6,16 +6,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class RepositorioClientes implements ClientesDAO {
     static final String FICHERO = "clientes.csv";
     private final Path clientecsv = Path.of(FICHERO);
-
+    private final List<Cliente> clientes = new ArrayList<>();
 
     // @Override
     public List<Cliente> cargarClientes() {
-        List<Cliente> clientes = new ArrayList<>();
 
         if (!Files.exists(clientecsv)) {
             return clientes;//Ta vacio / no existe
@@ -83,6 +83,7 @@ public class RepositorioClientes implements ClientesDAO {
         }
         return false;
     }
+
     public Cliente buscarPorId(int id) {
         List<Cliente> clientes = cargarClientes();
         for (Cliente cliente : clientes) {
@@ -92,4 +93,9 @@ public class RepositorioClientes implements ClientesDAO {
         }
         return null;
     }
+
+    public List<Cliente> getClienteOrden() {
+        return clientes.stream().sorted(Comparator.comparing(Cliente::getNombre,String.CASE_INSENSITIVE_ORDER).thenComparing(Cliente::getId)).toList();
+    }
+
 }
