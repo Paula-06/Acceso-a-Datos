@@ -17,7 +17,7 @@ import java.util.Scanner;
             String telefono;
             String matricula;
 
-        //Pedimos nombre
+            //Pedimos nombre
             do {
                 System.out.print("Nombre: ");
                 nombre = sc.nextLine().trim();  //eliminamos los espacios en blanco
@@ -29,7 +29,7 @@ import java.util.Scanner;
             } while (nombre.isEmpty());
 
 
-        //Pedimos telefono
+            //Pedimos telefono
             do {
                 System.out.print("Teléfono: ");
                 telefono = sc.nextLine().trim();
@@ -39,7 +39,7 @@ import java.util.Scanner;
                 }
             } while (telefono.isEmpty());
 
-        //Pedimos matricula y verificamos que no exista
+            //Pedimos matricula y verificamos que no exista
             do {
                 System.out.print("Matrícula: ");
                 matricula = sc.nextLine().trim().toUpperCase();//Ponemos en mayusculas
@@ -47,7 +47,7 @@ import java.util.Scanner;
                     System.out.println("La matrícula no puede estar vacía.");
                 }
             } while (matricula.isEmpty());
-            if(repositorio.existeMatricula(matricula)){
+            if (repositorio.existeMatricula(matricula)) {
                 System.out.println("Esa matrícula ya está registrada.");
                 return;
             }
@@ -60,11 +60,10 @@ import java.util.Scanner;
         }
 
 
-
         // Listar clientes
         public void listarClientes() {
 
-            List<Cliente> clientes = repositorio.cargarClientes();
+            List<Cliente> clientes = repositorio.getClienteOrden();
 
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
@@ -76,10 +75,11 @@ import java.util.Scanner;
                 System.out.println(cliente);
             }
         }
+
         // Buscar cliente
         public void buscarCliente() {
 
-            List<Cliente> clientes = repositorio.cargarClientes();
+            List<Cliente> clientes = repositorio.getClienteOrden();
 
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
@@ -108,34 +108,5 @@ import java.util.Scanner;
                 System.out.println("No se encontraron coincidencias.");
             }
         }
-
-        // Buscar cliente por ID
-        public Cliente obtenerClientePorId(int id) {
-
-            List<Cliente> clientes = repositorio.cargarClientes();
-
-            for (Cliente cliente : clientes) {
-
-                if (cliente.getId() == id) {
-                    return cliente;
-                }
-            }
-
-            return null;
-        }
-
-        public void buscarPorMatricula() {
-            System.out.println("Matricula: ");
-            String matricula = sc.nextLine();
-
-            List<Cliente> clientes = repositorio.cargarClientes();
-
-            for (Cliente cliente : clientes) {
-                if (cliente.getMatricula().equalsIgnoreCase(matricula)) {
-                    System.out.println(cliente);
-                    return;
-                }
-            }
-            System.out.println("No existe");
-        }
     }
+

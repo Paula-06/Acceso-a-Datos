@@ -11,4 +11,6 @@ public interface ClientesDAO {
     boolean existeMatricula(String matricula);
 
     Cliente buscarPorId(int id);
+
+    List<Cliente> getClienteOrden();
 }
