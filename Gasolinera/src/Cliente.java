@@ -1,3 +1,4 @@
+import java.util.Locale;
 
 public class Cliente implements Comparable<Cliente> {
     //Atributos
@@ -16,7 +17,8 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public String toCsv() {
-        return id + ";" +
+        return "[" +
+                id + ";" +
                 nombre + ";" +
                 telefono + ";" +
                 matricula.toUpperCase();
@@ -43,6 +45,17 @@ public class Cliente implements Comparable<Cliente> {
                 ", Teléfono: " + telefono +
                 ", Matrícula: " + matricula;
     }
+
+    public String toJson() {
+        return "{" +
+                "\n [" +
+                "\n { id: " + id + " nombre: " + nombre +
+                " telefono: " + telefono +
+                " matricula: " + matricula.toUpperCase() + "}" +
+                "\n }"
+                ;
+    }
+
 
     // Implementación de la comparación
     @Override

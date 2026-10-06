@@ -9,21 +9,20 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class RepositorioClientes implements ClientesDAO {
-    static final String FICHERO = "clientes.csv";
-    private final Path clientecsv = Path.of(FICHERO);
+public class RepoJson implements ClientesDAO {
 
-
+    static final String FICHERO = "clientes.json";
+    private final Path clientejson = Path.of(FICHERO);
 
 
     // @Override
     public List<Cliente> cargarClientes() {
         List<Cliente> clientes = new ArrayList<>();
 
-        if (!Files.exists(clientecsv)) {
+        if (!Files.exists(clientejson)) {
             return clientes;//Ta vacio / no existe
         }
-        try (BufferedReader br = Files.newBufferedReader(clientecsv, StandardCharsets.UTF_8)) {
+        try (BufferedReader br = Files.newBufferedReader(clientejson, StandardCharsets.UTF_8)) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (linea.isBlank()) {
@@ -32,7 +31,7 @@ public class RepositorioClientes implements ClientesDAO {
                 String[] datos = linea.split(",");
                 if (datos.length != 4) {
                     continue;
-                    }
+                }
 
                 int id = Integer.parseInt(datos[0]);
                 String nombre = datos[1];
@@ -40,7 +39,7 @@ public class RepositorioClientes implements ClientesDAO {
                 String matricula = datos[3];
 
                 Cliente cliente = new Cliente(id, nombre, telefono, matricula);
-               clientes.add(cliente);
+                clientes.add(cliente);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -50,16 +49,23 @@ public class RepositorioClientes implements ClientesDAO {
 
     public void guardarCliente(Cliente cliente) {
         Path ruta = Path.of(FICHERO);
-        //7. Escribir texto
-        //8. StandardOpenOption: decidir cómo se abre
 
+        List<Cliente> clientes =  cargarClientes();
 
-        try (BufferedWriter escritor = Files.newBufferedWriter(ruta,StandardCharsets.UTF_8,
-                StandardOpenOption.CREATE,
-                StandardOpenOption.APPEND)) {
-            escritor.write(cliente.toCsv());
-            escritor.newLine();
-        } catch (IOException e) {
+            try (BufferedWriter escritor = Files.newBufferedWriter(ruta, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+                escritor.write("\n");
+                escritor.newLine();
+
+                for (int i = 0; i < clientes.size(); i++) {
+                    escritor.write(clientes.get(i).toJson());
+                    if ( i< clientes.size() - 1) {
+                        escritor.write(",");
+                    } escritor.newLine();
+                } escritor.write("[");
+
+                clientes.add(cliente);
+
+            } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -103,5 +109,6 @@ public class RepositorioClientes implements ClientesDAO {
         return clientes.stream().sorted(Comparator.comparing(Cliente::getNombre,String.CASE_INSENSITIVE_ORDER).thenComparing(Cliente::getId)).toList();
         //ordena la lista por nombre, resuelve empates por ID y devuelve el resultado como nueva lista.
     }
+
 
 }

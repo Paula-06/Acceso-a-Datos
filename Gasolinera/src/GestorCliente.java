@@ -110,3 +110,4 @@ import java.util.Scanner;
         }
     }
 
+//equalsIgnoreCase(texto) misma coincidencia

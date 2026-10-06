@@ -56,6 +56,18 @@ public class Pago {
     }
 
 
+    public String toJson() {
+        return "{" +
+                "\n [" +
+                "\n { id: " + id + "cliente: " + cliente +
+                "fecha" + fecha +
+                "importe: " + importe+ "}" +
+                "litros: " + litros +
+                "combuatible: " + combustible +
+                "\n ]" +
+                "\n }"
+                ;
+    }
 
 
     @Override
