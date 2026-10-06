@@ -47,12 +47,10 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public String toJson() {
-        return "{" +
-                "\n [" +
-                "\n { id: " + id + " nombre: " + nombre +
-                " telefono: " + telefono +
-                " matricula: " + matricula.toUpperCase() + "}" +
-                "\n }"
+        return
+                "{ id: " + id + ", nombre: " + nombre +
+                ", telefono: " + telefono +
+                ", matricula: " + matricula.toUpperCase() + "}"
                 ;
     }
 

@@ -29,7 +29,7 @@ public class RepositorioClientes implements ClientesDAO {
                 if (linea.isBlank()) {
                     continue; // ignorar las líneas que están vacías o que solo tienen espacios en blanco.
                 }
-                String[] datos = linea.split(",");
+                String[] datos = linea.split(";");
                 if (datos.length != 4) {
                     continue;
                     }

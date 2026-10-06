@@ -15,13 +15,9 @@ public class RepositorioPagos implements PagosDAO {
     static final String FICHERO = "pagos.csv";
     private final Path ruta = Path.of(FICHERO);
 
-
-
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {
     List<Pago> pagos = new ArrayList<>();
-
-
         if (!Files.exists(ruta)) {
             return pagos;
         }

@@ -20,7 +20,7 @@ public class RepoJson implements ClientesDAO {
         List<Cliente> clientes = new ArrayList<>();
 
         if (!Files.exists(clientejson)) {
-            return clientes;//Ta vacio / no existe
+            return clientes;
         }
         try (BufferedReader br = Files.newBufferedReader(clientejson, StandardCharsets.UTF_8)) {
             String linea;
@@ -31,39 +31,28 @@ public class RepoJson implements ClientesDAO {
                 String[] datos = linea.split(",");
                 if (datos.length != 4) {
                     continue;
+
                 }
 
-                int id = Integer.parseInt(datos[0]);
-                String nombre = datos[1];
-                String telefono = datos[2];
-                String matricula = datos[3];
+                int id = Integer.parseInt(datos[0].split(":")[1].trim());
+                String nombre = datos[1].split(":")[1].trim();
+                String telefono = datos[2].split(":")[1].trim();
+                String matricula = datos[3].split(":")[1].trim();
 
                 Cliente cliente = new Cliente(id, nombre, telefono, matricula);
                 clientes.add(cliente);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
-        return clientes;
+        } return clientes;
     }
 
     public void guardarCliente(Cliente cliente) {
         Path ruta = Path.of(FICHERO);
 
-        List<Cliente> clientes =  cargarClientes();
-
             try (BufferedWriter escritor = Files.newBufferedWriter(ruta, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-                escritor.write("\n");
+                escritor.write(cliente.toJson());
                 escritor.newLine();
-
-                for (int i = 0; i < clientes.size(); i++) {
-                    escritor.write(clientes.get(i).toJson());
-                    if ( i< clientes.size() - 1) {
-                        escritor.write(",");
-                    } escritor.newLine();
-                } escritor.write("[");
-
-                clientes.add(cliente);
 
             } catch (IOException e) {
             System.out.println(e.getMessage());
