@@ -18,7 +18,6 @@ public class RepoJson implements ClientesDAO {
     // @Override
     public List<Cliente> cargarClientes() {
         List<Cliente> clientes = new ArrayList<>();
-
         if (!Files.exists(clientejson)) {
             return clientes;
         }
