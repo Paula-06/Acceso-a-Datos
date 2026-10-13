@@ -38,9 +38,9 @@ idPago;cliente;fecha;litros;importe;combustible
     ]
 }
 
--- Decisiones de diseño tomadas --
-- Uso de clases Cliente y Pago como entidades.
-- Uso de gestores para la lógica de negocio.
-- Uso de interfaces para desacoplar la persistencia.
-- Uso de repositorios para lectura y escritura en ficheros, uno para cada.
-- Uso de migracion para la traduccion de csv a json
+-- Cambios realizados --
+- Creación de la clase "MigrarCsvToJson"
+- Crear los almacenamientos para los ficheros de json 
+- Cambios en la clase Menú para que el destinatario sean los ficheros json y no csv
+- Añadir en el main la migracion antes de inicializar las opciones del menú en caso de no existir los ficheros json
+

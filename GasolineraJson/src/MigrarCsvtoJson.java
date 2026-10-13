@@ -15,8 +15,7 @@ public class MigrarCsvtoJson {
     private int clientesMigrados = 0;
     private int pagosMigrados = 0;
 
-    public MigrarCsvtoJson(RepoJson repoClientesJson, RepoJsonP repoPagosJson, 
-                           RepositorioClientes repoClientesCsv, RepositorioPagos repoPagosCsv) {
+    public MigrarCsvtoJson(RepoJson repoClientesJson, RepoJsonP repoPagosJson, RepositorioClientes repoClientesCsv, RepositorioPagos repoPagosCsv) {
         this.repoClientesJson = repoClientesJson;
         this.repoPagosJson = repoPagosJson;
         this.repoClientesCsv = repoClientesCsv;
@@ -24,7 +23,7 @@ public class MigrarCsvtoJson {
     }
 
     public void migracion() {
-        // Comprobamos si ya existen los ficheros JSON de destino
+        // Comprobamos si ya existen los ficheros JSON
         if (Files.notExists(Path.of("clientes.json")) && Files.notExists(Path.of("pagos.json"))) {
             System.out.print("¿Desea migrar datos CSV a JSON? (Y/n): ");
             String input;
@@ -54,7 +53,6 @@ public class MigrarCsvtoJson {
     private void prepararArchivosJson() throws IOException {
         Path fClientes = Path.of("clientes.json");
         Path fPagos = Path.of("pagos.json");
-
         if (Files.notExists(fClientes)) {
             Files.createFile(fClientes);
         }
@@ -65,27 +63,23 @@ public class MigrarCsvtoJson {
 
     private void migrarClientes() {
         List<Cliente> clientes = repoClientesCsv.cargarClientes(); // Asegúrate de que el método en tu RepositorioClientes se llame así
-
         if (clientes != null) {
             for (Cliente c : clientes) {
                 repoClientesJson.guardarCliente(c);
                 clientesMigrados++;
             }
         }
-
         System.out.println("Clientes migrados: " + clientesMigrados);
     }
 
     private void migrarPagos() {
         List<Pago> pagos = repoPagosCsv.cargarPagos(); // Asegúrate de que el método en tu RepositorioPagos se llame así
-
         if (pagos != null) {
             for (Pago p : pagos) {
                 repoPagosJson.guardarPago(p);
                 pagosMigrados++;
             }
         }
-
         System.out.println("Pagos migrados: " + pagosMigrados);
     }
 }

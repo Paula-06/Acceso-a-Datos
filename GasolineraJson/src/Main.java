@@ -22,6 +22,6 @@ public class Main {
         Menu menu = new Menu(gestorCliente, gestorPagos);
         
         // 4. Arrancar la aplicación
-        menu.iniciar(); // O el método que utilices para iniciar el bucle del menú
+        menu.iniciar();
     }
 }

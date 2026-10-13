@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 
     public class GestorCliente {
-
         ClientesDAO repositorio;
         Scanner sc = new Scanner(System.in);
 
@@ -20,14 +19,13 @@ import java.util.Scanner;
             //Pedimos nombre
             do {
                 System.out.print("Nombre: ");
-                nombre = sc.nextLine().trim();  //eliminamos los espacios en blanco
+                nombre = sc.nextLine().trim();  //eliminamos espacios en blanco
 
-                //comprobar no contiene elementos o tiene longitud de cero
+                //comprobar que no contiene elementos o tiene longitud de cero
                 if (nombre.isEmpty()) {
                     System.out.println("El nombre no puede estar vacío.");
                 }
             } while (nombre.isEmpty());
-
 
             //Pedimos telefono
             do {
@@ -51,7 +49,6 @@ import java.util.Scanner;
                 System.out.println("Esa matrícula ya está registrada.");
                 return;
             }
-
             int id = repositorio.obtenerSiguienteId();
 
             Cliente cliente = new Cliente(id, nombre, telefono, matricula);
@@ -62,14 +59,11 @@ import java.util.Scanner;
 
         // Listar clientes
         public void listarClientes() {
-
             List<Cliente> clientes = repositorio.getClienteOrden();
-
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
                 return;
             }
-
             System.out.println("\n----- LISTADO DE CLIENTES -----");
             for (Cliente cliente : clientes) {
                 System.out.println(cliente);
@@ -78,32 +72,24 @@ import java.util.Scanner;
 
         // Buscar cliente
         public void buscarCliente() {
-
             List<Cliente> clientes = repositorio.getClienteOrden();
-
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
                 return;
             }
-
             System.out.print("Buscar: ");
             String texto = sc.nextLine().trim().toLowerCase();
 
             boolean encontrado = false;
             for (Cliente cliente : clientes) {
-
-                String datos = (
-                        cliente.getNombre() + " " +
+                String datos = (cliente.getNombre() + " " +
                                 cliente.getTelefono() + " " +
-                                cliente.getMatricula()
-                ).toLowerCase();
-
+                                cliente.getMatricula()).toLowerCase();
                 if (datos.contains(texto)) {
                     System.out.println(cliente);
                     encontrado = true;
                 }
             }
-
             if (!encontrado) {
                 System.out.println("No se encontraron coincidencias.");
             }

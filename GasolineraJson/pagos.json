@@ -1,1 +1,2 @@
- { id: 1, cliente: Andrea, fecha: 30/09/2026, importe: 45.65, litros: 30.0, combuatible: Diesel}
+
+ { id: 1, cliente: Andrea, fecha: 13/10/2026, importe: 5.0, litros: 48.0, combustible: Diesel}

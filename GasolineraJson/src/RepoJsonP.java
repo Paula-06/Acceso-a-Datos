@@ -23,14 +23,14 @@ public class RepoJsonP implements PagosDAO{ //Probar con Map y Reduce
         if (!Files.exists(pagojson)) {
             return pagos;
         }
-
+        SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
         try (BufferedReader br = Files.newBufferedReader(pagojson, StandardCharsets.UTF_8)) {
             String lineas;
             while ((lineas = br.readLine()) != null) {
                 if (lineas.isBlank()) {
                     continue; // ignorar las líneas que están vacías o que solo tienen espacios en blanco.
                 }
-                SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+
                 String[] datos = lineas.split(",");
                 if (datos.length != 6) {
                     continue;
@@ -45,8 +45,6 @@ public class RepoJsonP implements PagosDAO{ //Probar con Map y Reduce
                 Pago pago = new Pago(id, cliente, fecha, importe, litros, combustible);
                 pagos.add(pago);
             }
-
-
         } catch (IOException | ParseException e) {
             System.out.println(e.getMessage());;
         }
@@ -56,7 +54,6 @@ public class RepoJsonP implements PagosDAO{ //Probar con Map y Reduce
     //Guarda Pago
     public void guardarPago(Pago pago) {
         Path ruta = Path.of(FICHERO);
-
         try (BufferedWriter escritor = Files.newBufferedWriter(ruta, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             escritor.write(pago.toJson());
             escritor.newLine();
@@ -65,16 +62,14 @@ public class RepoJsonP implements PagosDAO{ //Probar con Map y Reduce
         }
     }
 
-    // // Calcula el siguiente id para un nuevo cliente.
+    // Calcula el siguiente id para un nuevo cliente.
     public int obtenerSigId() {
         List<Pago> pagos = cargarPagos();
-
         int max = 0;
-
         for (Pago p : pagos) {
             if (p.getId() > max ) {
                 max = p.getId();
             }
-        } return max;
+        } return max +1;
     }
 }

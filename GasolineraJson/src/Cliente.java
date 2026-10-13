@@ -16,14 +16,6 @@ public class Cliente implements Comparable<Cliente> {
         this.matricula = matricula;
     }
 
-    public String toCsv() {
-        return "[" +
-                id + ";" +
-                nombre + ";" +
-                telefono + ";" +
-                matricula.toUpperCase();
-    }
-
     //Getters
     public int getId() {//Devuelve id
         return id;
@@ -46,27 +38,29 @@ public class Cliente implements Comparable<Cliente> {
                 ", Matrícula: " + matricula;
     }
 
-    public String toJson() {
-        return
-                "{ id: " + id + ", nombre: " + nombre +
-                ", telefono: " + telefono +
-                ", matricula: " + matricula.toUpperCase() + "}"
-                ;
+    public String toCsv() {
+        return id + ";" +
+                nombre + ";" +
+                telefono + ";" +
+                matricula.toUpperCase();
     }
 
+    public String toJson() {
+        return "{ id: " + id + ", nombre: " + nombre +
+                ", telefono: " + telefono +
+                ", matricula: " + matricula.toUpperCase() + "}";
+    }
 
     // Implementación de la comparación
     @Override
     public int compareTo(Cliente otro) {
-        // 1. Comparar nombres ignorando mayúsculas/minúsculas
+        //  Comparar nombres ignorando mayúsculas/minúsculas
         int comparacionNombre = this.nombre.compareToIgnoreCase(otro.nombre);
-
-        // 2. Si los nombres NO son iguales, devolvemos el resultado de esa comparación
+        // Si los nombres NO son iguales, devolvemos el resultado de esa comparación
         if (comparacionNombre != 0) {
             return comparacionNombre;
         }
-
-        // 3. Si los nombres coinciden, desempatamos por id ascendente
+        // Si los nombres coinciden, desempatamos por id ascendente
         return Integer.compare(this.id, otro.id);
     }
 }

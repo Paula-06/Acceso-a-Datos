@@ -48,16 +48,13 @@ public class RepoJson implements ClientesDAO {
 
     public void guardarCliente(Cliente cliente) {
         Path ruta = Path.of(FICHERO);
-
             try (BufferedWriter escritor = Files.newBufferedWriter(ruta, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
                 escritor.write(cliente.toJson());
                 escritor.newLine();
-
             } catch (IOException e) {
-            System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
         }
     }
-
 
     //Operaciones
     public int obtenerSiguienteId() {

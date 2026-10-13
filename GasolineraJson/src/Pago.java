@@ -63,7 +63,7 @@ public class Pago {
                 ", fecha: " + formateo.format(fecha) +
                 ", importe: " + importe+
                 ", litros: " + litros +
-                ", combuatible: " + combustible + "}";
+                ", combustible: " + combustible + "}";
     }
 
 

@@ -9,13 +9,10 @@ import java.util.Scanner;
 
 
 public class GestorPagos {
-    //Funcionalidades obligatorias
-
     PagosDAO repPago;
     ClientesDAO repoCliente;
     Scanner sc = new Scanner(System.in);
 
-    // Constructor que recibe ambos repositorios
     public GestorPagos(PagosDAO repositorioPagos, ClientesDAO repositorioClientes) {
         this.repPago = repositorioPagos;
         this.repoCliente = repositorioClientes;
@@ -24,12 +21,10 @@ public class GestorPagos {
     // Procesar un pago de repostaje
     public void procesarPago() {
         List<Cliente> clientes = repoCliente.cargarClientes();
-
         if (clientes == null || clientes.isEmpty()) {
             System.out.println("No se han encontrado clientes.");
             return;
         }
-
         System.out.printf("%-5s %-15s %-12s %-12s%n", "ID", "NOMBRE", "TELÉFONO", "MATRÍCULA");
         for (Cliente c : clientes) {
             System.out.printf("%-5d %-15s %-12s %-12s%n", c.getId(), c.getNombre(), c.getTelefono(), c.getMatricula());
@@ -37,7 +32,6 @@ public class GestorPagos {
 
         // Pedir ID del cliente y verificar que existe
         Cliente clienteSeleccionado = null;
-
         do {
             System.out.println("ID del cliente: ");
             String IdCliente = sc.nextLine().trim();
@@ -58,7 +52,7 @@ public class GestorPagos {
             }
         } while (clienteSeleccionado == null);
 
-
+        //Pedir fecha
         Date fecha = null;
         SimpleDateFormat formateo = new SimpleDateFormat("dd/MM/yyyy");
         do {
@@ -107,7 +101,6 @@ public class GestorPagos {
                 System.out.println(e.getMessage());
             }
         } while (litros <= 0);
-
         sc.nextLine();
 
         //Pedir combustible
@@ -115,7 +108,6 @@ public class GestorPagos {
         do {
             System.out.println("Combustible: ");
             String opciones = sc.nextLine();
-
             if (opciones.equalsIgnoreCase("Gasolina")) {
                 combustible = Combustible.Gasolina;
             } else if (opciones.equalsIgnoreCase("Diesel")) {
