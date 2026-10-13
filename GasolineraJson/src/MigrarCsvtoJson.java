@@ -62,7 +62,7 @@ public class MigrarCsvtoJson {
     }
 
     private void migrarClientes() {
-        List<Cliente> clientes = repoClientesCsv.cargarClientes(); // Asegúrate de que el método en tu RepositorioClientes se llame así
+        List<Cliente> clientes = repoClientesCsv.cargarClientes();
         if (clientes != null) {
             for (Cliente c : clientes) {
                 repoClientesJson.guardarCliente(c);
@@ -73,7 +73,7 @@ public class MigrarCsvtoJson {
     }
 
     private void migrarPagos() {
-        List<Pago> pagos = repoPagosCsv.cargarPagos(); // Asegúrate de que el método en tu RepositorioPagos se llame así
+        List<Pago> pagos = repoPagosCsv.cargarPagos(); 
         if (pagos != null) {
             for (Pago p : pagos) {
                 repoPagosJson.guardarPago(p);
