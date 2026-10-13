@@ -63,7 +63,7 @@ public class Pago {
                 ", fecha: " + formateo.format(fecha) +
                 ", importe: " + importe+
                 ", litros: " + litros +
-                ", combustible: " + combustible + "}";
+                ", combustible: " + combustible + " }";
     }
 
 
@@ -76,6 +76,6 @@ public class Pago {
                 ", fecha: " + formateo.format(fecha) +
                 ", importe: " + importe +
                 ", litros: " + litros +
-                ", combustible: " + combustible;
+                ", combustible: " + combustible.name();
     }
 }

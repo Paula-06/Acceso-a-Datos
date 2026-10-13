@@ -81,6 +81,6 @@ public class RepositorioPagos implements PagosDAO {
             if (p.getId() > max ) {
                 max = p.getId();
             }
-        } return max;
+        } return max +1;
     }
 }

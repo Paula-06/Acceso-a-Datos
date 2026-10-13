@@ -14,7 +14,6 @@ public class RepoJson implements ClientesDAO {
     static final String FICHERO = "clientes.json";
     private final Path clientejson = Path.of(FICHERO);
 
-
     // @Override
     public List<Cliente> cargarClientes() {
         List<Cliente> clientes = new ArrayList<>();
@@ -30,9 +29,7 @@ public class RepoJson implements ClientesDAO {
                 String[] datos = linea.split(",");
                 if (datos.length != 4) {
                     continue;
-
                 }
-
                 int id = Integer.parseInt(datos[0].split(":")[1].trim());
                 String nombre = datos[1].split(":")[1].trim();
                 String telefono = datos[2].split(":")[1].trim();

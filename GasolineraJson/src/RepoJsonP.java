@@ -14,8 +14,6 @@ import java.util.List;
 public class RepoJsonP implements PagosDAO{ //Probar con Map y Reduce
     static final String FICHERO = "pagos.json";
     private final Path pagojson = Path.of(FICHERO);
-    //Debe
-
 
     //Carga los Pagos ya almacenados
     public List<Pago> cargarPagos() {
@@ -30,17 +28,20 @@ public class RepoJsonP implements PagosDAO{ //Probar con Map y Reduce
                 if (lineas.isBlank()) {
                     continue; // ignorar las líneas que están vacías o que solo tienen espacios en blanco.
                 }
-
                 String[] datos = lineas.split(",");
                 if (datos.length != 6) {
                     continue;
                 }
+
+
+
                 int id = Integer.parseInt(datos[0].split(":")[1].trim());
                 String cliente = datos[1].split(":")[1].trim();
                 Date fecha = form.parse(datos[2].split(":")[1].trim());
                 double importe = Double.parseDouble(datos[3].split(":")[1].trim());
                 double litros = Double.parseDouble(datos[4].split(":")[1].trim());
-                Combustible combustible = Combustible.valueOf(datos[5].split(":")[1].trim());
+                String combustibleTexto = datos[5].split(":")[1].replace("}", "").replace("\"", "").trim();
+                Combustible combustible = Combustible.valueOf(combustibleTexto);
 
                 Pago pago = new Pago(id, cliente, fecha, importe, litros, combustible);
                 pagos.add(pago);
