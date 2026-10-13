@@ -73,7 +73,7 @@ public class MigrarCsvtoJson {
     }
 
     private void migrarPagos() {
-        List<Pago> pagos = repoPagosCsv.cargarPagos(); 
+        List<Pago> pagos = repoPagosCsv.cargarPagos();
         if (pagos != null) {
             for (Pago p : pagos) {
                 repoPagosJson.guardarPago(p);

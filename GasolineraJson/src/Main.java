@@ -9,18 +9,18 @@ public class Main {
         MigrarCsvtoJson migrador = new MigrarCsvtoJson(repoClientesJson, repoPagosJson, repoClientesCsv, repoPagosCsv);
         migrador.migracion();
 
-        //CSV
+        //------------- CSV
         // GestorCliente gestorCliente = new GestorCliente(repoClientesCsv);
         // GestorPagos gestorPagos = new GestorPagos(repoPagosCsv, repoClientesCsv);
 
-        //JSON
+        //------------- JSON
         GestorCliente gestorCliente = new GestorCliente(repoClientesJson);
         GestorPagos gestorPagos = new GestorPagos(repoPagosJson, repoClientesJson);
 
 
         Menu menu = new Menu(gestorCliente, gestorPagos);
         
-        // 4. Arrancar la aplicación
+        //Arrancar la aplicación
         menu.iniciar();
     }
 }
