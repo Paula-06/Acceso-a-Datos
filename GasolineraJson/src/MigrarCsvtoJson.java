@@ -12,8 +12,8 @@ public class MigrarCsvtoJson {
     private final RepositorioPagos repoPagosCsv;
     private final Scanner sc = new Scanner(System.in);
 
-    private int clientesMigrados = 0;
-    private int pagosMigrados = 0;
+
+
 
     public MigrarCsvtoJson(RepoJson repoClientesJson, RepoJsonP repoPagosJson, RepositorioClientes repoClientesCsv, RepositorioPagos repoPagosCsv) {
         this.repoClientesJson = repoClientesJson;
@@ -62,6 +62,8 @@ public class MigrarCsvtoJson {
     }
 
     private void migrarClientes() {
+        int clientesMigrados = 0;
+
         List<Cliente> clientes = repoClientesCsv.cargarClientes();
         if (clientes != null) {
             for (Cliente c : clientes) {
@@ -73,6 +75,7 @@ public class MigrarCsvtoJson {
     }
 
     private void migrarPagos() {
+         int pagosMigrados = 0;
         List<Pago> pagos = repoPagosCsv.cargarPagos();
         if (pagos != null) {
             for (Pago p : pagos) {

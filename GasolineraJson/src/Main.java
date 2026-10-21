@@ -19,7 +19,7 @@ public class Main {
 
 
         Menu menu = new Menu(gestorCliente, gestorPagos);
-        
+
         //Arrancar la aplicación
         menu.iniciar();
     }
