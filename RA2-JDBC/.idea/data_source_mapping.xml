@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/sql/sqlite/01-esquema.sql" value="66d2f552-f3e4-4da9-9e50-82ef6b240d4c" />
+  </component>
+</project>
