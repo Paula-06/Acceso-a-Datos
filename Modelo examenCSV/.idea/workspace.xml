@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1cc151b2-ab50-4781-9c56-a3b3493162c8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Arbol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/Arbol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/ExamenRA1B.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/FormatoJsonIncorrectoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/JsonPlano.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/OperacionesArboles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/ParseadorArboles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modelo-Examen-1/src/TipoDatoIncorrectoException.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3LFIbsTdUl9bsY2ztmt6E59XwxB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/pauli/Documents/Clase/DAM2/Acceso-a-Datos/Modelo examenCSV/src/Main.java"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1cc151b2-ab50-4781-9c56-a3b3493162c8" name="Changes" comment="" />
+      <created>1793043467312</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1793043467312</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

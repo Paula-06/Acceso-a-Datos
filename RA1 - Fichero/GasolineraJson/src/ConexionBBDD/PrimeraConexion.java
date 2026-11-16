@@ -30,9 +30,6 @@ public final class PrimeraConexion {
                 configuracion.execute("PRAGMA foreign_keys = ON");
             }
 
-            // Crear las tablas
-            crearTablas(conexion);
-
             System.out.println("Conexión SQLite abierta: " + archivo.toAbsolutePath());
             System.out.println("Conexión válida: " + conexion.isValid(2));
             System.out.println("Auto-commit: " + conexion.getAutoCommit());
@@ -44,39 +41,5 @@ public final class PrimeraConexion {
         System.out.println("La conexión se ha cerrado al salir de try-with-resources.");
     }
 
-
-    private static void crearTablas(Connection conexion) {
-
-        String sqlClientes = """
-            CREATE TABLE IF NOT EXISTS clientes (
-                id INTEGER PRIMARY KEY,
-                nombre TEXT NOT NULL,
-                telefono TEXT,
-                matricula TEXT
-            )
-            """;
-
-        String sqlPagos = """
-            CREATE TABLE IF NOT EXISTS pagos (
-                id INTEGER PRIMARY KEY,
-                cliente TEXT NOT NULL,
-                fecha TEXT NOT NULL,
-                importe REAL NOT NULL,
-                litros REAL NOT NULL,
-                combustible TEXT NOT NULL
-            )
-            """;
-
-        try (Statement sentencia = conexion.createStatement()) {
-
-            sentencia.execute(sqlClientes);
-            sentencia.execute(sqlPagos);
-
-            System.out.println("Tabla clientes creada o ya existente.");
-            System.out.println("Tabla pagos creada o ya existente.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
 }
