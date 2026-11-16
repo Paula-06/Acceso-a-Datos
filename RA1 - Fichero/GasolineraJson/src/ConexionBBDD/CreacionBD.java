@@ -16,7 +16,7 @@ public class CreacionBD {
             CREATE TABLE IF NOT EXISTS clientes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
-                telefono TEXT,
+                telefono TEXT,º
                 matricula TEXT
             )""";
 
