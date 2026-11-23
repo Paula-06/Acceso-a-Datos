@@ -1,26 +1,19 @@
 public class Main {
     public static void main(String[] args) {
-        RepoJson repoClientesJson = new RepoJson();
-        RepoJsonP repoPagosJson = new RepoJsonP();
-        RepositorioClientes repoClientesCsv = new RepositorioClientes();
-        RepositorioPagos repoPagosCsv = new RepositorioPagos();
+        RepoJson repoJson = new RepoJson();
+        RepositorioCsv repoCsv = new RepositorioCsv();
 
-        //Ejecutar la migración al principio
-        MigrarCsvtoJson migrador = new MigrarCsvtoJson(repoClientesJson, repoPagosJson, repoClientesCsv, repoPagosCsv);
+        // Migración al principio, usando las clases unificadas
+        MigrarCsvtoJson migrador = new MigrarCsvtoJson(repoCsv, repoJson);
         migrador.migracion();
 
-        //------------- CSV
-        // GestorCliente gestorCliente = new GestorCliente(repoClientesCsv);
-        // GestorPagos gestorPagos = new GestorPagos(repoPagosCsv, repoClientesCsv);
+        // Para trabajar con CSV en lugar de JSON bastaría con:
+        // RepositorioGasolinera almacen = repoCsv;
+        RepositorioGasolinera almacen = repoJson;
+        GestorGasolinera gestor = new GestorGasolinera(almacen);
+        Menu menu = new Menu(gestor);
 
-        //------------- JSON
-        GestorCliente gestorCliente = new GestorCliente(repoClientesJson);
-        GestorPagos gestorPagos = new GestorPagos(repoPagosJson, repoClientesJson);
-
-
-        Menu menu = new Menu(gestorCliente, gestorPagos);
-        
-        //Arrancar la aplicación
+        // Arrancar la aplicación
         menu.iniciar();
     }
 }

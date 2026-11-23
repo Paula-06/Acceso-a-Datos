@@ -2,33 +2,28 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
-    private GestorCliente gestorCliente;
-    private GestorPagos gestorPagos;
+    // Un único gestor para clientes y pagos
+    private final GestorGasolinera gestor;
 
-    public Menu(GestorCliente gestorCliente,
-                GestorPagos gestorPagos) {
-
-        this.gestorCliente = gestorCliente;
-        this.gestorPagos = gestorPagos;
+    public Menu(GestorGasolinera gestor) {
+        this.gestor = gestor;
     }
 
     public void iniciar() {
         int opcion;
         do {
-
             mostrarMenu();
             opcion = sc.nextInt();
             sc.nextLine();
 
             switch (opcion) {
-
-                case 1 -> gestorCliente.altaCliente();
-                case 2 -> gestorCliente.listarClientes();
-                case 3 -> gestorCliente.buscarCliente();
-                case 4 -> gestorPagos.procesarPago();
-                case 5 -> gestorPagos.consultarPago();
+                case 1 -> gestor.altaCliente();
+                case 2 -> gestor.listarClientes();
+                case 3 -> gestor.buscarCliente();
+                case 4 -> gestor.procesarPago();
+                case 5 -> gestor.consultarPago();
                 case 0 -> System.out.println("Hasta Pronto.");
                 default -> System.out.println("Opción no válida.");
             }
@@ -36,7 +31,6 @@ public class Menu {
     }
 
     private void mostrarMenu() {
-
         System.out.println("\n=== GESTIÓN DE GASOLINERA ===");
         System.out.println("1. Dar de alta un cliente");
         System.out.println("2. Listar clientes");
