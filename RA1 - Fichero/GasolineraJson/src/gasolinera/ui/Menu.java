@@ -1,3 +1,7 @@
+package gasolinera.ui;
+
+import gasolinera.negocio.GestorGasolinera;
+
 import java.util.Scanner;
 
 public class Menu {

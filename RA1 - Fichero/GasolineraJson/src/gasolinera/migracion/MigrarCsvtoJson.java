@@ -1,3 +1,8 @@
+package gasolinera.migracion;
+
+import gasolinera.modelo.RegistroGasolinera;
+import gasolinera.persistencia.RepositorioGasolinera;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.List;

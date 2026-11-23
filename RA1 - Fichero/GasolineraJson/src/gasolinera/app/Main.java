@@ -1,3 +1,12 @@
+package gasolinera.app;
+
+import gasolinera.migracion.MigrarCsvtoJson;
+import gasolinera.negocio.GestorGasolinera;
+import gasolinera.persistencia.RepoJson;
+import gasolinera.persistencia.RepositorioCsv;
+import gasolinera.persistencia.RepositorioGasolinera;
+import gasolinera.ui.Menu;
+
 public class Main {
     public static void main(String[] args) {
         RepoJson repoJson = new RepoJson();

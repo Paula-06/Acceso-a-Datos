@@ -1,3 +1,7 @@
+package gasolinera.persistencia;
+
+import gasolinera.modelo.RegistroGasolinera;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

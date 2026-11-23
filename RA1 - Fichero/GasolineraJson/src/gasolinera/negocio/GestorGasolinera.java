@@ -1,3 +1,8 @@
+package gasolinera.negocio;
+
+import gasolinera.modelo.RegistroGasolinera;
+import gasolinera.persistencia.RepositorioGasolinera;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
