@@ -6,6 +6,12 @@ clientes y pagos de repostajes en CSV/JSON. La ampliación añade el diseño
 MySQL y un modelo de dominio nuevo (estaciones, tienda, personal, clientes,
 campañas, ventas, devoluciones e incidencias).
 
+## Contexto del proyecto
+
+1. Antes de trabajar, lee el `README.md` de la raíz y el `CONTEXT.md` de la
+   carpeta en la que vayas a trabajar.
+2. Si un `CONTEXT.md` y el código se contradicen, avísame; no decidas tú.
+
 ## Regla principal
 **Todo el acceso a MySQL será solo con JDBC (`java.sql`).**
 Nada de JPA, Hibernate, Spring ni otros ORM o frameworks. Si algo no se
@@ -21,7 +27,7 @@ puede hacer con JDBC, se pregunta; no se cambia de tecnología.
 | Ruta | Qué contiene | ¿Java o MySQL? |
 |---|---|---|
 | `src/gasolinera/{modelo,persistencia,negocio,ui,app,migracion}` | Práctica anterior (consola, CSV/JSON) | Java |
-| `src/ConexionBBDD/` | `PrimeraConexion.java`, conexión JDBC ya preparada. **Sin tocar** | Java |
+| `src/ConexionBBDD/` | `PrimeraConexion.java` y `CreacionBD.java`, conexión JDBC ya preparada. **Sin tocar** | Java |
 | `src/dominio/comunes` | `Dinero` (redondeo) y `ModalidadProducto` (reglas de cantidad) | Java |
 | `src/dominio/{estacion,personal,cliente,producto,venta,incidencia}` | Modelo de dominio nuevo | Java |
 | `src/dominio/demo` | `DemoProductos` (demostración en memoria) | Java |
