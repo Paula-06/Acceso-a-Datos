@@ -1,111 +1,101 @@
-# GasolineraJson — Fase 1: ampliación con MySQL
+# README.md — GasolineraJson (Acceso a Datos, 2.º DAM)
 
-Proyecto de 2.º DAM (Acceso a Datos). Parte de la aplicación ya existente
-(clientes y pagos de repostajes en **CSV/JSON**) y añade el diseño relacional y
-el modelo Java de dominio para gestionar estaciones, tienda, personal, clientes,
-campañas, ventas, devoluciones e incidencias. La persistencia MySQL mediante JDBC
-se implementará en la **siguiente fase**: hoy solo se entregan la base de datos,
-el modelo y la demostración en memoria.
+## Qué es
+Aplicación Java de gestión de gasolineras. La práctica anterior guarda
+clientes y pagos de repostajes en CSV/JSON. La ampliación añade el diseño
+MySQL y un modelo de dominio nuevo (estaciones, tienda, personal, clientes,
+campañas, ventas, devoluciones e incidencias).
 
-## Requisitos
+## Regla principal
+**Todo el acceso a MySQL será solo con JDBC (`java.sql`).**
+Nada de JPA, Hibernate, Spring ni otros ORM o frameworks. Si algo no se
+puede hacer con JDBC, se pregunta; no se cambia de tecnología.
 
-- JDK 21 (se ha compilado con `javac 21.0.13`).
-- MySQL 8.0.16 o superior (se usan `CHECK`, columnas
-  `GENERATED ALWAYS AS (...) STORED` e InnoDB).
-- Cliente MySQL o herramienta SQL (Workbench, DBeaver…) para ejecutar scripts.
-- Opcional: IntelliJ IDEA / Eclipse con `src` como carpeta de fuentes.
+## Estado actual
+- Fase 1 entregada: base de datos (23 tablas), scripts SQL, modelo de
+  dominio y demo en memoria.
+- Fase 2 (pendiente): métodos JDBC. Hoy no hay DAOs MySQL ni SQL en Java.
+- CSV y JSON siguen funcionando y sus datos no se tocan.
 
-No se necesita ninguna dependencia externa para compilar ni para ejecutar la
-demo: el driver JDBC se incorporará en la fase 2.
+## Mapa de carpetas
+| Ruta | Qué contiene | ¿Java o MySQL? |
+|---|---|---|
+| `src/gasolinera/{modelo,persistencia,negocio,ui,app,migracion}` | Práctica anterior (consola, CSV/JSON) | Java |
+| `src/ConexionBBDD/` | `PrimeraConexion.java`, conexión JDBC ya preparada. **Sin tocar** | Java |
+| `src/dominio/comunes` | `Dinero` (redondeo) y `ModalidadProducto` (reglas de cantidad) | Java |
+| `src/dominio/{estacion,personal,cliente,producto,venta,incidencia}` | Modelo de dominio nuevo | Java |
+| `src/dominio/demo` | `DemoProductos` (demostración en memoria) | Java |
+| `sql/` | 01 esquema, 02 triggers, 03 datos, 04 comprobaciones | MySQL |
+| `docs/DISENO.md` | Modelo relacional, diccionario, reglas y JDBC futuro | Documentación |
+| `README.md`, `AGENTS.md`, `style.md`, `Cambios.md`, `AUDITORIA_IA.odt` | Documentación y reglas | Documentación |
+| `clientes.csv/.json`, `pagos.csv/.json`, `gasolinera.sqlite` | Datos de la práctica anterior. **No tocar** | Datos |
 
-## Configuración de la conexión (sin credenciales personales)
+## Cómo saber si algo es Java o MySQL
+- `.java` dentro de `src/` → **Java**.
+- `.sql` dentro de `sql/` → **MySQL**.
+- Historial de precios → **trigger de MySQL** (`sql/02_triggers.sql`), nunca Java.
+- Claves foráneas, unicidad y `CHECK` → **MySQL**.
+- Validar cantidades y calcular importes según la modalidad → **Java**
+  (`dominio.comunes` y `dominio.producto`).
+- Reglas entre varios registros (altas conjuntas, ciclos de supervisión,
+  periodos solapados, devoluciones acumuladas) → **pendientes para JDBC**.
 
-Los scripts crean la base `gasolinera_ampliacion`. En la fase 2 la conexión se
-configurará con un fichero de propiedades **sin datos personales**, por ejemplo:
+## Clases del dominio
+Total: 34 clases (33 de modelo + `DemoProductos`), verificadas contra `src/dominio`.
 
-```properties
-db.url=jdbc:mysql://localhost:3306/gasolinera_ampliacion?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-db.user=USUARIO_DEL_ENTORNO
-db.password=CAMBIAR_EN_EL_ENTORNO_LOCAL
-```
+| Clase | Paquete | Función | ¿Tabla MySQL? |
+|---|---|---|---|
+| `Dinero` | `dominio.comunes` | Centraliza el redondeo monetario (2 decimales, `HALF_UP`). | No (utilidad) |
+| `ModalidadProducto` | `dominio.comunes` | Enum con comportamiento: reglas de cantidad de envasados y granel. | No (tipa `producto.modalidad`) |
+| `MedioPago` | `dominio.comunes` | Enum de medios de cobro. | No (tipa `pago.medio_pago`) |
+| `EstadoVenta` | `dominio.comunes` | Enum de estados del ticket. | No (tipa `venta.estado`) |
+| `EstadoSurtidor` | `dominio.comunes` | Enum de estados del surtidor. | No (tipa `surtidor.estado`) |
+| `EstadoIncidencia` | `dominio.comunes` | Enum de estados de la incidencia. | No (tipa `incidencia.estado`) |
+| `EstadoProducto` | `dominio.comunes` | Enum de estados del catálogo. | No (tipa `producto.estado`) |
+| `TipoCombustible` | `dominio.comunes` | Enum del combustible del surtidor. | No (tipa `surtidor.tipo_combustible`) |
+| `Estacion` | `dominio.estacion` | Estación con ficha enlazada y surtidores; valida número visible y baja del último equipo. | `estacion` |
+| `FichaFacturacion` | `dominio.estacion` | Serie y numeración de tickets de una estación. | `ficha_facturacion` |
+| `Surtidor` | `dominio.estacion` | Equipo con número visible único dentro de su estación; referencia directa a `Estacion`. | `surtidor` |
+| `Empleado` | `dominio.personal` | Identidad del personal; rechaza auto-supervisión y ciclos. | `empleado` |
+| `Funcion` | `dominio.personal` | Clase abstracta base de las funciones. | `funcion` (catálogo) |
+| `Cajero` | `dominio.personal` | Función con límite de devoluciones. | `funcion_cajero` |
+| `Expendedor` | `dominio.personal` | Función con acreditación y caducidad. | `funcion_expendedor` |
+| `ResponsableTienda` | `dominio.personal` | Función con presupuesto de compras. | `funcion_responsable_tienda` |
+| `JefeEstacion` | `dominio.personal` | Función con nivel de autorización. | `funcion_jefe_estacion` |
+| `AsignacionFuncion` | `dominio.personal` | Periodo con condiciones en que se ejerce una función. | `asignacion_funcion` |
+| `Cliente` | `dominio.cliente` | Cliente registrado; exige al menos teléfono o email. | `cliente` |
+| `TarjetaFidelizacion` | `dominio.cliente` | Tarjeta emitida, asignable a un cliente. | `tarjeta_fidelizacion` |
+| `Campana` | `dominio.cliente` | Campaña promocional con fechas válidas. | `campana` |
+| `Inscripcion` | `dominio.cliente` | Participación de un cliente en una campaña, con fecha propia. | `inscripcion` |
+| `Producto` | `dominio.producto` | Clase abstracta del catálogo; valida cantidad y congela precio. | `producto` |
+| `ProductoEnvasado` | `dominio.producto` | Producto en unidades completas. | `producto` (modalidad envasada) |
+| `ProductoGranel` | `dominio.producto` | Producto por peso con precisión de pesada. | `producto` (modalidad granel) |
+| `Proveedor` | `dominio.producto` | Proveedor con acuerdo registrado. | `proveedor` |
+| `SuministroProveedor` | `dominio.producto` | Acuerdo vigente o histórico proveedor-producto. | `suministro_proveedor` |
+| `HistorialPrecio` | `dominio.producto` | Solo lectura: MySQL lo genera mediante trigger. | `historial_precio` (solo lectura) |
+| `Venta` | `dominio.venta` | Ticket; controla carrito y exige cobro exacto antes de `PAGADA`. | `venta` |
+| `LineaVenta` | `dominio.venta` | Línea con precio cobrado e importe calculado. | `linea_venta` |
+| `Pago` | `dominio.venta` | Cobro de tienda (distinto del pago de repostaje). | `pago` |
+| `Devolucion` | `dominio.venta` | Reintegro parcial acumulado de una línea. | `devolucion` |
+| `Incidencia` | `dominio.incidencia` | Incidencia de una estación con responsable actual. | `incidencia` |
+| `DemoProductos` | `dominio.demo` | Demostración en memoria; no guarda ni lee MySQL. | No |
 
-Ese fichero (o las variables de entorno) no debe subirse al repositorio con
-credenciales reales. La clase `ConexionBBDD/PrimeraConexion.java` ya preparada
-se conserva tal cual.
+## Ejemplo de correspondencia Java ↔ MySQL: surtidores
+- MySQL: tabla `surtidor` (`codigo_equipo` único en toda la empresa,
+  `UNIQUE(estacion_id, numero_visible)`, `tipo_combustible`, `estado` y FK
+  `estacion_id` a `estacion` con `RESTRICT`).
+- Java: `dominio.estacion.Surtidor` guarda `codigoEquipo`, `numeroVisible`,
+  `tipoCombustible` y `estado`, y mantiene una referencia directa a `Estacion`
+  mediante el método `enlazar(Estacion)`, con visibilidad de paquete.
+  `Estacion.anyadirSurtidor` rechaza repetir `numeroVisible` en esa estación
+  y `retirarSurtidor` impide dejarla sin equipos. El `id` es `Integer` y vale
+  `null` hasta que la capa JDBC asigna el autoincremental.
 
-## Orden de preparación de la base
+## Dos "Pago" distintos (no fusionar)
+- Pagos de repostaje de la práctica anterior (`RegistroGasolinera`).
+- Cobros de tienda: `dominio.venta.Pago`.
 
-Desde la raíz del proyecto:
-
-```bash
-mysql -u USUARIO -p < sql/01_esquema.sql
-mysql -u USUARIO -p < sql/02_triggers.sql
-mysql -u USUARIO -p < sql/03_datos.sql
-mysql -u USUARIO -p < sql/04_comprobaciones.sql
-```
-
-- `01_esquema.sql` crea la base y todas las tablas InnoDB (incluye `DROP TABLE
-  IF EXISTS`, así que **no lo ejecutes sobre datos reales**).
-- `02_triggers.sql` crea el trigger del historial de precios.
-- `03_datos.sql` carga los ejemplos coherentes; el histórico queda vacío.
-- `04_comprobaciones.sql` contiene consultas, la prueba del trigger (con
-  `ROLLBACK` final) y, **comentadas**, las sentencias que deben fallar.
-  Cópialas una a una si quieres provocar los errores esperados.
-
-## Compilación y ejecución de la demostración Java
-
-```bash
-javac -encoding UTF-8 -d out $(find src -name "*.java")     # Linux/macOS
-java -cp out dominio.demo.DemoProductos
-```
-
-En Windows (PowerShell):
-
-```powershell
-javac -encoding UTF-8 -d out (Get-ChildItem -Recurse src -Filter *.java).FullName
-java -cp out dominio.demo.DemoProductos
-```
-
-La demo construye objetos relacionados de todo el dominio y muestra: 3 × 0,29 €
-(unidades completas) frente a 1,50 kg × 12,50 € (granel), un ticket con dos
-cobros, dos devoluciones parciales, un cambio de precio que no altera el ticket
-antiguo y los rechazos esperados (1,5 unidades, 3 decimales en granel, carrito
-vacío, ciclo de supervisión, inscripción duplicada y exceso de devolución).
-No guarda ni lee MySQL.
-
-## Aplicación de consola original (CSV/JSON)
-
-```bash
-java -cp out gasolinera.app.Main
-```
-
-El menú sigue funcionando igual: migración CSV → JSON al inicio, altas,
-listados, búsquedas, pagos de repostaje y consultas. Los datos `clientes.csv`,
-`pagos.csv`, `clientes.json` y `pagos.json` no se han modificado.
-
-## Estructura
-
-```text
-GasolineraJson/
-├── src/
-│   ├── gasolinera/{modelo,persistencia,negocio,ui,app,migracion}/  ← práctica anterior
-│   ├── ConexionBBDD/                                              ← sin tocar
-│   └── dominio/{comunes,estacion,personal,cliente,producto,venta,incidencia,demo}/
-├── sql/{01_esquema.sql,02_triggers.sql,03_datos.sql,04_comprobaciones.sql}
-├── docs/DISENO.md        ← modelo relacional, diccionario, reglas y JDBC futuro
-├── README.md             ← este fichero
-├── AGENTS.md             ← notas para agentes
-├── AUDITORIA_IA.odt      ← registro de intervenciones de IA
-├── Cambios.md            ← historial de cambios
-└── clientes.csv / clientes.json / pagos.csv / pagos.json / gasolinera.sqlite
-```
-
-## Verificación realizada en esta fase
-
-- `javac -encoding UTF-8 -d out ...` sobre **todos** los `.java`: correcto.
-- `java -cp out dominio.demo.DemoProductos`: correcto, con los rechazos
-  esperados comprobados.
-- Scripts SQL revisados para coherencia de claves, FKs, `CHECK`, datos de
-  ejemplo y trigger. **No se han podido ejecutar aquí**: este entorno no tiene
-  MySQL instalado; ejecútalos en tu máquina siguiendo el orden indicado y
-  revisa los resultados esperados de `04_comprobaciones.sql`.
+## Reglas que no se deben romper
+Ver `AGENTS.md`. Resumen: solo lectura salvo autorización, nada fuera de
+JDBC, no tocar CSV/JSON/SQLite ni `ConexionBBDD`, y no insertar nunca en
+`historial_precio` desde Java.
