@@ -1,0 +1,5 @@
+
+ { id: 1, cliente: Paula, fecha: 13/10/2026, importe: 45.0, litros: 65.0, combustible: Diesel }
+ { id: 2, cliente: Paula, fecha: 13/10/2026, importe: 14.14, litros: 4.0, combustible: Diesel }
+ { id: 3, cliente: Andrea, fecha: 23/11/2026, importe: 4.77, litros: 2.2, combustible: Diesel }
+ { id: 4, cliente: Juan, fecha: 23/11/2026, importe: 0.55, litros: 7.0, combustible: Gasolina }
